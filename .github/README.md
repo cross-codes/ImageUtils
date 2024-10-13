@@ -6,7 +6,7 @@ compression and affine transform based rotation, built with Maven
 
 Current version : 1.0
 
-For a brief overview on the process of creating the API, check out
+For a brief overview on the process of creating the application, check out
 `📁notes/notes.md`
 
 </div>
@@ -24,13 +24,13 @@ As of version 1.0, compression and rotation functionalities have been implemente
 
 To build the project, clone the repository and run the following:
 
-```bash
+```zsh
 mvn clean package -DskipTests
 ```
 
 then run the test suite
 
-```bash
+```zsh
 mvn test
 ```
 
@@ -38,7 +38,7 @@ Once the tests have all passed, you may use the jar in `./target` freely.
 
 Run the following for help:
 
-```bash
+```zsh
 java -jar target/ImageUtils-1.0-SNAPSHOT.jar --help
 ```
 
@@ -47,9 +47,9 @@ java -jar target/ImageUtils-1.0-SNAPSHOT.jar --help
 ### Example usage
 
 (1) Compressing an image `IMG1.jpg` of format `.jpg` to `IMG2.jpg` with a
-threshold size of 2MB;
+threshold size of 2MB:
 
-```bash
+```zsh
 java -jar target/ImageUtils-1.0-SNAPSHOT.jar \
     --source IMG1.jpg \
     --dest IMG2 \
@@ -59,34 +59,35 @@ java -jar target/ImageUtils-1.0-SNAPSHOT.jar \
 ```
 
 (2) Rotating an image `IMG1.png` of format `.png` to `IMG2.png` by an angle of
-90 degrees.
+90 degrees:
 
-```bash
+```zsh
 java -jar target/ImageUtils-1.0-SNAPSHOT.jar \
     --source IMG1.jpg \
     --dest IMG2 \
     --ft jpg \
     --angle 90 \
-    --action compress
+    --action rotate
 ```
 
 ---
 
 ### Note
 
-(1) The compression utility also checks for `EXIF` tags to maintain orientation.
-Use `--ignore true` to skip this step. Read point (2) on why you may need this.
+* The compression utility also checks for `EXIF` tags to maintain orientation.
+Use `--ignore true` to skip this step.  
+Read point (2) on why you may need this.
 
-(2) Rotation uses affine transformations, so if the image is rectangular,
-possible losses of pixels may occur (refer to the core logic in `ImageRotator.java`).
+* Rotation uses affine transformations, so if the image is rectangular,
+possible losses of pixels may occur (refer to the core logic in `ImageRotator.java`).  
 This is unavoidable as of now.
 
-(3) It is possible that files are irresponsibly renamed to something they are not.
-An example is renaming and changing the extension (from `.jpg` to `.png`). While
-this may not appear to cause any problems when viewing the image, it is
-a critical piece of information for the ImageUtils tool. As such, the `ft` tag
-should be used correctly to ensure accurate results. In the future, it is expected
-that the `ft` is automatically read using the mimetype of the file.
+* It is possible that files are irresponsibly renamed to something they are not.
+An example is renaming and changing the extension (from `.jpg` to `.png`).  
+While this may not appear to cause any problems when viewing the image, it is
+a critical piece of information for the ImageUtils tool. As such, the `ft` flag
+should be used correctly to ensure accurate results.  
+In the future, it is expected that the `ft` is automatically read using the mimetype of the file.
 
 ---
 
